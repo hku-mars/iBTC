@@ -1,0 +1,47 @@
+<launch>
+  <param name="SaveDir" type="string" value="/home/zuhaozou/ws_iBTC/logs/"/>
+  <arg name="rviz" default="true" />
+
+  <node
+                pkg="ibtc"
+                type="ibtc"
+                name="ibtc"
+                output="screen"
+   />
+  <param name="setting_path" type="string" value = "$(find ibtc)/config/config_velo_kitti_fine.yaml"/>
+  <param name="bag_file" type="string" value = "/media/zuhaozou/PortableSSD1/Datasets/kitti/kitti00.bag"/>
+  <param name="imu_pose_fname" type="string" value = "/home/zuhaozou/bag_local/PR_evaluate_data/imu_poses_kitti00.txt"/>
+  <param name="cam_pose_fname" type="string" value = "/home/zuhaozou/bag_local/PR_evaluate_data/camera_poses_kitti00.txt"/>
+  <param name="IMG_WID" type="double" value = "1241"/>
+  <param name="IMG_HEI" type="double" value = "376"/>
+  <param name="fx" type="double" value = "979.92"/>
+  <param name="fy" type="double" value = "974.1183"/>
+  <param name="cx" type="double" value = "690.0"/>
+  <param name="cy" type="double" value = "248.6443"/>
+  <param name="pre_ds_image_level" type="int" value = "0"/>
+
+  <param name="R00" type="double" value = "1"/>
+  <param name="R01" type="double" value = "0"/>
+  <param name="R02" type="double" value = "0"/>
+  <param name="R10" type="double" value = "0"/>
+  <param name="R11" type="double" value = "1"/>
+  <param name="R12" type="double" value = "0"/>
+  <param name="R20" type="double" value = "0"/>
+  <param name="R21" type="double" value = "0"/>
+  <param name="R22" type="double" value = "1"/>
+  <param name="t0" type="double" value = "0"/>
+  <param name="t1" type="double" value = "0"/>
+  <param name="t2" type="double" value = "0"/>
+
+  <param name="save_for_pr_eval" type="int" value = "1"/>
+  <!--param name="save_for_avgrecall_eval" type="int" value = "1"/-->
+
+  <!--the searching range for ground truth loop closure. generally speaking, it should be half of LiDAR measurement maximum distance-->
+  <!-- range_gtlc_search > 20 is very slow. If you know the maximum revisit distance, you can self-define-->
+  <param name="range_gtlc_search" type="double" value = "50"/>
+
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find ibtc)/rviz_cfg/loop.rviz" />
+  </group>
+</launch>

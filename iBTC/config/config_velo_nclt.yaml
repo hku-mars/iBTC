@@ -1,0 +1,48 @@
+%YAML:1.0
+
+# pre process
+ds_size: 0.5
+useful_corner_num: 30
+vis_useful_corner_num: 30
+stop_skip_enable: 0
+
+# key points
+plane_detection_thre: 0.01
+plane_merge_normal_thre: 0.1
+plane_merge_dis_thre: 0.3
+voxel_size: 2
+voxel_init_num: 10
+proj_plane_num: 1
+proj_image_resolution: 0.5
+proj_image_high_inc: 0.1
+proj_dis_min: 0
+proj_dis_max: 5
+summary_min_thre: 10
+line_filter_enable: 1
+touch_filter_enable: 0
+
+# geo descriptor
+descriptor_near_num: 15
+descriptor_min_len: 0.1
+descriptor_max_len: 30
+max_constrait_dis: 0.3
+triangle_resolution: 0.2
+
+# vis descriptor
+vis_useful_corner_num: 30
+vis_des_near_num: 50
+vis_sim_threshold: 0.7
+
+# candidate search
+skip_near_num: 50
+candidate_num: 5
+sub_frame_num: 20
+ransac_Rt_thr: 4
+similarity_threshold: 0.7
+rough_dis_threshold: 0.2
+normal_threshold: 0.3
+dis_threshold: 0.3
+icp_threshold: 0.5  # plane-plane overlap, used for SLAM system
+
+# result record
+is_kitti: 0

@@ -1,0 +1,47 @@
+<launch>
+  <param name="SaveDir" type="string" value="/home/zuhaozou/ws_iBTC/logs/"/>
+  <arg name="rviz" default="true" />
+
+  <param name="setting_path" type="string" value = "$(find ibtc)/config/config_velo_newercollege.yaml"/>
+  <param name="bag_file" type="string" value = "/media/zuhaozou/PortableSSD1/Datasets/newer_college/rgb_loopdetection/newercollege_20211130park.bag"/>
+  <param name="imu_pose_fname" type="string" value = "/media/zuhaozou/PortableSSD1/Datasets/newer_college/rgb_loopdetection/imu_poses_newercollege_20211130park.txt"/>
+  <param name="cam_pose_fname" type="string" value = "/media/zuhaozou/PortableSSD1/Datasets/newer_college/rgb_loopdetection/camera_poses_newercollege_20211130park.txt"/>
+  <param name="IMG_WID" type="int" value = "720"/>
+  <param name="IMG_HEI" type="int" value = "540"/>
+  <param name="fx" type="double" value = "352.6103"/>
+  <param name="fy" type="double" value = "351.8079"/>
+  <param name="cx" type="double" value = "355.2861"/>
+  <param name="cy" type="double" value = "262.1618"/>
+  <param name="pre_ds_image_level" type="int" value = "0"/>
+
+  <param name="R00" type="double" value = "1"/>
+  <param name="R01" type="double" value = "0"/>
+  <param name="R02" type="double" value = "0"/>
+  <param name="R10" type="double" value = "0"/>
+  <param name="R11" type="double" value = "-1"/>
+  <param name="R12" type="double" value = "0"/>
+  <param name="R20" type="double" value = "0"/>
+  <param name="R21" type="double" value = "0"/>
+  <param name="R22" type="double" value = "-1"/>
+  <param name="t0" type="double" value = "-0.037"/>
+  <param name="t1" type="double" value = "-0.008"/>
+  <param name="t2" type="double" value = "-0.026"/>
+
+  <param name="save_for_pr_eval" type="int" value = "1"/>
+
+  <!--the searching range for ground truth loop closure. generally speaking, it should be half of LiDAR measurement maximum distance-->
+  <!-- range_gtlc_search > 20 is very slow. If you know the maximum revisit distance, you can self-define-->
+  <param name="range_gtlc_search" type="double" value = "50"/>
+
+  <node
+                pkg="ibtc"
+                type="ibtc"
+                name="ibtc"
+                output="screen"
+  />
+
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find ibtc)/rviz_cfg/loop.rviz" />
+  </group>
+</launch>

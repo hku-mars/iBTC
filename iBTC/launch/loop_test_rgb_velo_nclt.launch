@@ -1,0 +1,47 @@
+<launch>
+  <param name="SaveDir" type="string" value="/home/zuhaozou/ws_iBTC/logs/"/>
+  <arg name="rviz" default="true" />
+
+  <node
+                pkg="ibtc"
+                type="ibtc"
+                name="ibtc"
+                output="screen"
+  />
+  <param name="setting_path" type="string" value = "$(find ibtc)/config/config_velo_nclt.yaml"/>
+  <param name="bag_file" type="string" value = "/media/zuhaozou/PortableSSD1/Datasets/NCLT/nclt_120820_cut.bag"/>
+  <!--param name="bag_file" type="string" value = "/media/zuhaozou/DC36866236863D90/BaiduNetdiskDownload/nclt_120115_cut.bag"/-->
+  <param name="imu_pose_fname" type="string" value = "/home/zuhaozou/bag_local/PR_evaluate_data/imu_poses_nclt120820.txt"/>
+  <param name="cam_pose_fname" type="string" value = "/home/zuhaozou/bag_local/PR_evaluate_data/camera_poses_nclt120820.txt"/>
+  <param name="IMG_WID" type="int" value = "1616"/>
+  <param name="IMG_HEI" type="int" value = "1232"/>
+  <param name="fx" type="double" value = "399.4331"/>
+  <param name="fy" type="double" value = "399.4331"/>
+  <param name="cx" type="double" value = "826.3619"/>
+  <param name="cy" type="double" value = "621.6686"/>
+  <param name="pre_ds_image_level" type="int" value = "0"/>
+  <param name="set_used_region" type="int" value = "1"/>
+
+  <param name="R00" type="double" value = "1"/>
+  <param name="R01" type="double" value = "0"/>
+  <param name="R02" type="double" value = "0"/>
+  <param name="R10" type="double" value = "0"/>
+  <param name="R11" type="double" value = "1"/>
+  <param name="R12" type="double" value = "0"/>
+  <param name="R20" type="double" value = "0"/>
+  <param name="R21" type="double" value = "0"/>
+  <param name="R22" type="double" value = "1"/>
+  <param name="t0" type="double" value = "0.112"/>
+  <param name="t1" type="double" value = "0.176"/>
+  <param name="t2" type="double" value = "-0.247"/>
+
+  <param name="save_for_pr_eval" type="int" value = "1"/>
+
+  <!--the searching range for ground truth loop closure. generally speaking, it should be half of LiDAR measurement maximum distance-->
+  <!-- range_gtlc_search > 20 is very slow. If you know the maximum revisit distance, you can self-define-->
+  <param name="range_gtlc_search" type="double" value = "50"/>
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find ibtc)/rviz_cfg/loop.rviz" />
+  </group>
+</launch>
